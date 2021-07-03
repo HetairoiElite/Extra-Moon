@@ -1,13 +1,48 @@
+#include <iostream>
+
+using namespace std;
+
 class Empleado
 {
 private:
-    /* data */
+    float sueldo;
+    string nombre;
+
 public:
     Empleado();
+    Empleado(float _sueldo, string _nombre);
     ~Empleado();
+
+    float getSueldo();
+    string getNombre();
+    void setSueldo(float _sueldo);
+    void setNombre(string _nombre);
+    virtual float calcularSueldo(float _horas);
 };
 
+float Empleado::getSueldo()
+{
+    return sueldo;
+}
+
+string Empleado::getNombre()
+{
+    return nombre;
+}
+
+void Empleado::setNombre(string _nombre)
+{
+    nombre = _nombre;
+}
+void Empleado::setSueldo(float _sueldo)
+{
+    sueldo = _sueldo;
+}
+
 Empleado::Empleado()
+{
+}
+Empleado::Empleado(float _sueldo, string _nombre)
 {
 }
 
@@ -18,7 +53,6 @@ Empleado::~Empleado()
 class EmpleadoxHora : public Empleado
 {
 private:
-    /* data */
 public:
     EmpleadoxHora();
     ~EmpleadoxHora();
@@ -35,7 +69,6 @@ EmpleadoxHora::~EmpleadoxHora()
 class EmpleadoxPlanta : public Empleado
 {
 private:
-    /* data */
 public:
     EmpleadoxPlanta();
     ~EmpleadoxPlanta();
@@ -47,4 +80,10 @@ EmpleadoxPlanta::EmpleadoxPlanta()
 
 EmpleadoxPlanta::~EmpleadoxPlanta()
 {
+}
+
+int main(int argc, const char **argv)
+{
+    EmpleadoxPlanta expl;
+    return 0;
 }
