@@ -6,6 +6,7 @@ class Empleado
 {
 private:
     float sueldo;
+    int horas;
     string nombre;
 
 public:
@@ -15,6 +16,8 @@ public:
 
     float getSueldo();
     string getNombre();
+    int getHoras();
+    void setHoras(int _horas);
     void setSueldo(float _sueldo);
     void setNombre(string _nombre);
     virtual float calcularSueldo(float _horas);
@@ -28,6 +31,16 @@ float Empleado::getSueldo()
 string Empleado::getNombre()
 {
     return nombre;
+}
+
+int Empleado::getHoras()
+{
+    return horas;
+}
+
+void Empleado::setHoras(int _horas)
+{
+    horas = _horas;
 }
 
 void Empleado::setNombre(string _nombre)
