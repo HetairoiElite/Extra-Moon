@@ -4,14 +4,14 @@ using namespace std;
 
 class Empleado
 {
-private:
+protected:
     float sueldo;
     int horas;
     string nombre;
 
 public:
     Empleado();
-    Empleado(float _sueldo, string _nombre);
+    Empleado(float _sueldo, string _nombre, int _horas);
     ~Empleado();
 
     float getSueldo();
@@ -20,7 +20,7 @@ public:
     void setHoras(int _horas);
     void setSueldo(float _sueldo);
     void setNombre(string _nombre);
-    virtual float calcularSueldo(float _horas);
+    virtual float calcularSueldo() = 0;
 };
 
 float Empleado::getSueldo()
@@ -55,8 +55,11 @@ void Empleado::setSueldo(float _sueldo)
 Empleado::Empleado()
 {
 }
-Empleado::Empleado(float _sueldo, string _nombre)
+Empleado::Empleado(float _sueldo, string _nombre, int _horas)
 {
+    sueldo = _sueldo;
+    nombre = _nombre;
+    horas = _horas;
 }
 
 Empleado::~Empleado()
@@ -69,9 +72,10 @@ private:
 public:
     EmpleadoxHora();
     ~EmpleadoxHora();
+    float calcularSueldo() = 0;
 };
 
-EmpleadoxHora::EmpleadoxHora()
+EmpleadoxHora::EmpleadoxHora() : Empleado::Empleado()
 {
 }
 
@@ -79,16 +83,25 @@ EmpleadoxHora::~EmpleadoxHora()
 {
 }
 
+float EmpleadoxHora::calcularSueldo()
+{
+    return sueldo * horas;
+}
+
 class EmpleadoxPlanta : public Empleado
 {
 private:
 public:
-    EmpleadoxPlanta();
+    EmpleadoxPlanta() : Empleado() {}
+    EmpleadoxPlanta(float _sueldo, string _nombre, int _horas) : Empleado(_sueldo, _nombre, _horas)
+    {
+    }
     ~EmpleadoxPlanta();
+    float calcularSueldo();
 };
-
-EmpleadoxPlanta::EmpleadoxPlanta()
+float EmpleadoxPlanta::calcularSueldo()
 {
+    return sueldo;
 }
 
 EmpleadoxPlanta::~EmpleadoxPlanta()
@@ -97,6 +110,7 @@ EmpleadoxPlanta::~EmpleadoxPlanta()
 
 int main(int argc, const char **argv)
 {
-    EmpleadoxPlanta expl;
+    string nombre = "John";
+    EmpleadoxPlanta e1(10.10, nombre, 10);
     return 0;
 }
