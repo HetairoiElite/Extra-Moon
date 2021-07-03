@@ -1,4 +1,5 @@
 #include <iostream>
+#define HorasxJornada 8
 
 using namespace std;
 
@@ -70,14 +71,13 @@ class EmpleadoxHora : public Empleado
 {
 private:
 public:
-    EmpleadoxHora();
+    EmpleadoxHora() : Empleado() {}
+    EmpleadoxHora(float _sueldo, string _nombre, int _horas) : Empleado(_sueldo, _nombre, _horas)
+    {
+    }
     ~EmpleadoxHora();
-    float calcularSueldo() = 0;
+    float calcularSueldo();
 };
-
-EmpleadoxHora::EmpleadoxHora() : Empleado::Empleado()
-{
-}
 
 EmpleadoxHora::~EmpleadoxHora()
 {
@@ -110,7 +110,10 @@ EmpleadoxPlanta::~EmpleadoxPlanta()
 
 int main(int argc, const char **argv)
 {
-    string nombre = "John";
-    EmpleadoxPlanta e1(10.10, nombre, 10);
+    EmpleadoxPlanta e1(10.10, "John", HorasxJornada);
+    std::cout << "El suledo del empleado de planta " << e1.getNombre() << " es: " << e1.calcularSueldo() << std::endl;
+
+    EmpleadoxHora e2(5.50, "Gato", HorasxJornada);
+    std::cout << "El suledo del empleado por hora " << e2.getNombre() << " es: " << e2.calcularSueldo() << std::endl;
     return 0;
 }
